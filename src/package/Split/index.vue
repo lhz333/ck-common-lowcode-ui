@@ -202,8 +202,8 @@
       </el-form>
     </div>
 
-    <p class="submit-tip">提交前，请仔细检查拆单/换货数据是否填写正确</p>
     <div slot="footer" class="dialog-footer">
+      <p class="submit-tip">提交前，请仔细检查拆单/换货数据是否填写正确</p>
       <el-button type="info" @click="close">取消</el-button>
       <el-button type="primary" @click="submitSplitForm">确认</el-button>
     </div>
@@ -693,7 +693,7 @@ export default {
 <style lang="less">
 .sku-draggable-form {
   padding: 10px 10px 0 10px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   border: 1px dashed #aaa;
 }
 .submit-tip {
