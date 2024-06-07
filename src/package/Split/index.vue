@@ -205,7 +205,7 @@
     <div slot="footer" class="dialog-footer">
       <p class="submit-tip">提交前，请仔细检查拆单/换货数据是否填写正确</p>
       <el-button type="info" @click="close">取消</el-button>
-      <el-button type="primary" @click="submitSplitForm">确认</el-button>
+      <el-button type="primary" :loading="submitLoading" @click="submitSplitForm">确认</el-button>
     </div>
 
     <ReceiverDialog
@@ -227,6 +227,7 @@ export default {
   data() {
     return {
       API,
+      submitLoading: false,
       clearTaobaoTidValues: false,
       warehouseAll: [],
       shipperList: [],
@@ -280,10 +281,6 @@ export default {
         return {}
       }
     },
-    splitDialogVisible: {
-      type: Boolean,
-      default: false
-    },
     pageType: String,
     csexceptionType: String,
     isReissue: Boolean
@@ -292,6 +289,17 @@ export default {
     this.getShipperList()
     this.getWarehouses()
     this.getStoreInfo()
+    
+    const { receiverName, receiverMobile, receiverAddress } = this.rowData
+    this.initReceiverInfo = { receiverName, receiverMobile, receiverAddress }
+
+    if (this.pageType === 'allTrades') {
+      this.orderShopId = this.rowData.shopId
+      let id = !this.rowData.splitType
+        ? this.rowData.taobaoTid
+        : this.rowData.parent
+      this.getSkuList(id)
+    }
   },
   methods: {
     async getExchangeReason(shopid){
@@ -590,8 +598,10 @@ export default {
               }
             }
             
+            this.submitLoading = true
             let res = await this.$axios.post(requestUrl, { ...paramsData })
             let { Status, Msg } = res.data
+            this.submitLoading = false
             if (Status == 'true') {
               this.$message.success(Msg)
               if (this.csexceptionType) this.updateFinnish()
@@ -627,27 +637,6 @@ export default {
     }
   },
   watch: {
-    splitDialogVisible: {
-      handler(val) {
-        if (val) {
-          const { receiverName, receiverMobile, receiverAddress } = this.rowData
-          this.initReceiverInfo = {
-            receiverName,
-            receiverMobile,
-            receiverAddress
-          }
-        }
-        if (this.pageType === 'allTrades' && val) {
-          this.orderShopId = this.rowData.shopId
-          let id = !this.rowData.splitType
-            ? this.rowData.taobaoTid
-            : this.rowData.parent
-          this.getSkuList(id)
-        }
-        if(!val) this.params = {}
-      },
-      immediate: true
-    },
     'form.splitNum'(newVal, oldVal) {
       if (newVal > oldVal && this.pageData.skuInfoVOList.length !== newVal) {
         if(this.pageData.skuAndProductList.length){
