@@ -216,6 +216,7 @@
 </template>
 
 <script>
+import qs from 'qs'
 import SkuList from './SkuList.vue'
 import Group from './group.vue'
 import ReceiverDialog from './ReceiverDialog.vue'
@@ -372,18 +373,20 @@ export default {
     // 获取仓位
     async getWarehouses () {
       let params = {
-        type: 'EC'
-      }
-      let res = await this.$axios.get(API.system.getDataListInfo, {
-        params: {
-          sortName: 'id',
-          sortOrder: '1',
-          pageSize: '-1',
-          table: 'oms_warehouse_info',
-          id: '63',
-          queryParameters: params
+        sortName: 'id',
+        sortOrder: '1',
+        pageSize: '10000',
+        table: 'oms_warehouse_info',
+        id: '63',
+        queryParameters: {
+          type: 'EC'
         }
-      })
+      }
+      let res = await this.$axios.get(
+        `${API.system.getDataListInfo}?${qs.stringify(params, {
+          indices: false
+        })}`
+      )
       let { Status, Result: { content } } = res.data
       if (Status == 'true') {
         this.warehouseAll = content
