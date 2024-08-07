@@ -411,10 +411,8 @@ export default {
      * 判断是否是二次换货
      */
     async checkExchange() {
-      let res = await this.$axios.get(API.order.checkExchange, {
-        params: {
-          outId: this.params.taobaoTid
-        }
+      let res = await this.$axios.post(API.order.checkExchange, {
+        taobaotid: this.params.taobaoTid
       })
       let { Status, Result } = res.data
       if (Status == 'true') {
@@ -442,10 +440,10 @@ export default {
       }
     },
     // 获取sku列表
-    async getSkuList(dataId) {
-      let res = await this.$axios.get(
-        `${API.order.listTradeByTaoBaoTidLastExchange}/${dataId}`
-      )
+    async getSkuList(taobaotid) {
+      let res = await this.$axios.post(API.order.listTradeByTaoBaoTidLastExchange, {
+        taobaotid
+      })
       let { Status, Result } = res.data
       if (Status == 'true') {
         let {
