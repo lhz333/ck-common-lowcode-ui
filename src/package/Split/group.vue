@@ -125,7 +125,7 @@
             </el-col>
           </el-row> -->
         </el-form-item>
-        <img v-if="item.isChange" class="change_image" src="./images/exchanged.png" alt="">
+        <div v-if="item.isChange" class="change_image">已换货</div>
         <i class="el-icon-error close-icon" @click="handleRemove(index)"></i>
       </li>
     </draggable>
@@ -379,10 +379,17 @@ export default {
     }
     .change_image {
       position: absolute;
-      left: -15px;
+      left: -19px;
       top: -10px;
-      width: 30px;
+      width: 38px;
       z-index: 2;
+      font-size: 12px;
+      height: 38px;
+      border: 1px solid red;
+      border-radius: 50%;
+      line-height: 38px;
+      color: red;
+      transform: rotate(-45deg);
     }
   }
   .ghostClass {
