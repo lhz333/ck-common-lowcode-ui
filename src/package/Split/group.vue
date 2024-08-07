@@ -313,7 +313,7 @@ export default {
     async handleVirtualCode (storeId, type = '') {
       if(!storeId) return
       let res = await this.$axios.get(API.customer.getStoreO2OList, {
-        params: { storeId }
+        params: { branch: storeId }
       })
       let { Status, Result, Msg } = res.data
       if(Status == 'true') {

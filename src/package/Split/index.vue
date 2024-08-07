@@ -19,6 +19,7 @@
               v-model="params.taobaoTid"
               key-field="taobaoTid"
               show-field="taobaoTid"
+              search-field="taobaotid"
               :result-format="resultFormat"
               @values="taobaoTidValues"
             ></v-selectpage>
