@@ -21,6 +21,7 @@ export default {
     getExchangeReason: '/metaData/api/open/getExchangeReason',
   },
   system: {
-    getDataListInfo: '/formAPI/base/dataList', // 仓位联动框
+    getDataListInfo: '/formAPI/base/dataList', // 仓位联动框，
+    getShopConfigByKey: '/omsUrl/admin/admin-center/shopmanager/getShopConfigBykey', // 根据key获取店铺配置
   }
 }

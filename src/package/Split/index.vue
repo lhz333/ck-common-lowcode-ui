@@ -447,6 +447,9 @@ export default {
       })
       let { Status, Result } = res.data
       if (Status == 'true') {
+        
+        this.rowData = this.common.deepClone(Result)
+        
         let {
           skuAndProductList,
           guid,
