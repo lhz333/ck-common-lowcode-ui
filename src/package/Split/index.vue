@@ -329,11 +329,9 @@ export default {
       if (this.rowData.parent && this.rowData.parent.length > 0) {
         taobaotid = this.rowData.parent
       }
-      let res = await this.$axios.get(API.order.getOnlineDecrypt, {
-        params: {
-          oaid: this.rowData.oaid,
-          taobaotid: taobaotid
-        }
+      let res = await this.$axios.post(API.order.getOnlineDecrypt, {
+        oaid: this.rowData.oaid,
+        taobaotid: taobaotid
       })
 
       let { Status, Result, Msg } = { ...res.data }
