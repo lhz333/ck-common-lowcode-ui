@@ -1,7 +1,7 @@
 export default {
   customer: {
     getStoreO2OList: '/metaData/api/open/store/storeO2OList', // O2O门店列表
-    addTradeExchangeByReissue: '/omsUrl/admin/customer-center/cep/case/addTradeExchangeByReissue', //客户收件异常拆单
+    addTradeExchangeByReissue: '/metaData/api/flow/cep/case/addTradeExchangeByReissue', //客户收件异常拆单
     addExchange: '/metaData/api/flow/cep/exchange/addExchange', //增加换货
   },
   order: {

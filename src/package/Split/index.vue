@@ -443,7 +443,7 @@ export default {
       let res = await this.$axios.post(API.order.listTradeByTaoBaoTidLastExchange, {
         taobaotid
       })
-      let { Status, Result } = res.data
+      let { Status, Result, Msg } = res.data
       if (Status == 'true') {
         
         this.rowData = this.common.deepClone(Result)
@@ -500,7 +500,7 @@ export default {
           this.form.splitNum = 1
         }
       } else {
-        this.$message.error(Result)
+        this.$message.error(Result || Msg)
       }
     },
     // 提交拆单数据
