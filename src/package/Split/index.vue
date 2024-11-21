@@ -88,6 +88,14 @@
             ></el-input-number>
           </el-form-item>
         </el-col>
+        <el-col :span="4">
+          <el-form-item label="是否补发">
+            <el-radio-group v-model="pageData.consignType" style="width: 210px">
+              <el-radio :label="3">补发</el-radio>
+              <el-radio :label="0">不补发</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-col>
         <!-- <el-col
         v-if="pageType === 'allTrades' && pageData.shopId == 20"
         :span="8"
@@ -247,7 +255,8 @@ export default {
         receiverZip: '',
         trackNumber: '',
         skuInfoVOList: [],
-        taobaoTid: ''
+        taobaoTid: '',
+        consignType: 0
       },
       params: {},
       checkExchangeRes: false,
